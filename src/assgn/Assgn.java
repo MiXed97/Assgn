@@ -16,6 +16,19 @@ public class Assgn {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ArrayListInterface<student>  a= new ArrList<>();
+        
+        a.add(new student("Nicholas","123"));
+        a.add(new student("Soon Jian Kai","321"));
+        a.add(new student("Ng Poh Hooi","456"));
+        a.add(new student("Ong Kai Zhi","193"));
+        
+        
+        for(int i = 0; i<a.size();i++){
+            System.out.println(a.get(i).toString());
+        }
+        
+        
     }
     
 }

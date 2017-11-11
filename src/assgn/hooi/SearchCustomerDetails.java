@@ -5,6 +5,8 @@
  */
 package assgn.hooi;
 
+import assgn.ArrList;
+import assgn.ArrayListInterface;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ public class SearchCustomerDetails extends JFrame{
     private JLabel space = new JLabel();
     private JLabel phoneLbl = new JLabel("Enter customer's phone number: ");
     private ProfileInterface p1;
-    private ArrayList<ProfileInterface> userList = new ArrayList(); 
+    private ArrayListInterface<ProfileInterface> userList = new ArrList();
+    private ArrayList<ProfileInterface> userList2 = new ArrayList(); 
            
     public SearchCustomerDetails(){
         startUp();
@@ -58,27 +61,36 @@ public class SearchCustomerDetails extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-      
-        JTextField test = new JTextField("Customer Details will display here");
-        JTextArea detailsTA = new JTextArea(50, 200);
-        String cusDetails = String.format("%-5s %-10s", "abcde","abcde12345");
+        JFrame detailsFrame = new JFrame();
+        
+        detailsFrame.setSize(500, 300);
+        detailsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        detailsFrame.setLocationRelativeTo(null);
+        
+        JTextArea detailsTA = new JTextArea(50, 200);;
+
+        String cusDetails = String.format("%70s\n", "Customer Details");
+        
+        cusDetails += String.format("%-20s %-20s %-50s %-20s\n------------------------------------------------------------------------------------------------------------------------" , 
+                "Name","Phone number","Address","Email");
         
         for(int a = 0; a<userList.size();a++){
             p1 = userList.get(a);
-            if(p1.matchPhone(phoneTxt.getText()))    
-                cusDetails += "\n"+" "+p1.getName()+" "+p1.getPhone()+" "+p1.getAddress()+" "+p1.getEmail()+" ";
-            
+            if(p1.matchPhone(phoneTxt.getText())){
+                cusDetails += String.format("\n%-20s %-20s %-50s %-20s\n",p1.getName(),p1.getPhone(),p1.getAddress(),p1.getEmail());
+                detailsFrame.setVisible(true);
+                break;
+            }
+            else{
+                detailsFrame.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Unable to find customer with the number "+phoneTxt.getText(), "Searching Customer Details", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            }
         }
-        
         detailsTA.setText(cusDetails);
         detailsTA.setEditable(false);
-      
-        JFrame detailsFrame = new JFrame();
+          
         detailsFrame.add(detailsTA);
-        detailsFrame.setSize(300, 300);
-        detailsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        detailsFrame.setLocationRelativeTo(null);
-        detailsFrame.setVisible(true);
 
         }
   }
