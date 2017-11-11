@@ -9,7 +9,6 @@ import assgn.ArrList;
 import assgn.ArrayListInterface;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -24,7 +23,6 @@ public class SearchCustomerDetails extends JFrame{
     private JLabel phoneLbl = new JLabel("Enter customer's phone number: ");
     private ProfileInterface p1;
     private ArrayListInterface<ProfileInterface> userList = new ArrList();
-    private ArrayList<ProfileInterface> userList2 = new ArrayList(); 
            
     public SearchCustomerDetails(){
         startUp();
