@@ -11,10 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-/**
- *
- * @author pc
- */
+
 public class SearchCustomerDetails extends JFrame{
     
     private JButton searchBtn = new JButton("Search");
