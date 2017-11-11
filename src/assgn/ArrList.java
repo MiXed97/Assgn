@@ -35,7 +35,7 @@ public class ArrList<T> implements ArrayListInterface{
     public boolean remove(Object element) {
         
         int delete;
-        for(int i = 0; i < length;i++){
+        for(int i = 0; i <= length;i++){
         if(element.equals(List[i])){
             delete = i;
             fillGap(delete);
@@ -78,8 +78,8 @@ public class ArrList<T> implements ArrayListInterface{
 
     public void fillGap(int delete) {
         
-        for(int i=delete;i < (length+1);i++){
-            List[delete]= List[delete+1];
+        for(int i=delete;i <= length;i++){
+            List[i]= List[i+1];
         }
             
         
