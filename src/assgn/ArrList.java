@@ -79,7 +79,7 @@ public class ArrList<T> implements ArrayListInterface{
     public void fillGap(int delete) {
         
         for(int i=delete;i <= length;i++){
-            List[delete]= List[delete+1];
+            List[i]= List[i+1];
         }
             
         
