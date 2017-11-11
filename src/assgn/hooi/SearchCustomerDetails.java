@@ -50,6 +50,8 @@ public class SearchCustomerDetails extends JFrame{
         userList.add(p1);
         p1 = new Profile("Tester 3","0123456787","pv14","tester3@gmail.com");
         userList.add(p1);
+        p1 = new Profile("Tester 4","0123456786","pv13","tester4@gmail.com");
+        userList.add(p1);
     }
     
     private class SubmitListener implements ActionListener {
