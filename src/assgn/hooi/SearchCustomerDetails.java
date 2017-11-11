@@ -66,20 +66,24 @@ public class SearchCustomerDetails extends JFrame{
         
         cusDetails += String.format("%-20s %-20s %-50s %-20s\n------------------------------------------------------------------------------------------------------------------------" , 
                 "Name","Phone number","Address","Email");
+        p1=userList.get(0);
         
         for(int a = 0; a<userList.size();a++){
             p1 = userList.get(a);
+            
             if(p1.matchPhone(phoneTxt.getText())){
                 cusDetails += String.format("\n%-20s %-20s %-50s %-20s\n",p1.getName(),p1.getPhone(),p1.getAddress(),p1.getEmail());
                 detailsFrame.setVisible(true);
                 break;
             }
-            else{
+            System.out.println(userList.size());
+            System.out.println(a);
+            if(a+1 == userList.size() && !p1.matchPhone(phoneTxt.getText())){
                 detailsFrame.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Unable to find customer with the number "+phoneTxt.getText(), "Searching Customer Details", JOptionPane.INFORMATION_MESSAGE);
-                break;
             }
         }
+        
         detailsTA.setText(cusDetails);
         detailsTA.setEditable(false);
           
