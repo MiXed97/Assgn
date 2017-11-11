@@ -17,11 +17,15 @@ public class Assgn {
     public static void main(String[] args) {
         // TODO code application logic here
         ArrayListInterface<student>  a= new ArrList<>();
-        
-        a.add(new student("Nicholas","123"));
-        a.add(new student("Soon Jian Kai","321"));
-        a.add(new student("Ng Poh Hooi","456"));
-        a.add(new student("Ong Kai Zhi","193"));
+        student s = new student("Nicholas","123");
+        student s1 = new student("Soon Jian Kai","321");
+        student s2 = new student("Ng Poh Hooi","456");
+        student s3 = new student("Ong Kai Zhi","193");
+        a.add(s);
+        a.add(s1);
+        a.add(s2);
+        a.add(s3);
+        a.remove(s1);
         
         
         for(int i = 0; i<a.size();i++){
