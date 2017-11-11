@@ -40,13 +40,13 @@ public class SearchCustomerDetails extends JFrame{
     }
     
     public void startUp(){
-        p1 = new Profile("Tester 1","0123456789","pv16","tester1@gmail.com");
+        p1 = new Profile("Tester 1","0123456789","pv16","tester01@gmail.com");
         userList.add(p1);
-        p1 = new Profile("Tester 2","0123456788","pv15","tester2@gmail.com");
+        p1 = new Profile("Tester 2","0123456788","pv15","tester02@gmail.com");
         userList.add(p1);
-        p1 = new Profile("Tester 3","0123456787","pv14","tester3@gmail.com");
+        p1 = new Profile("Tester 3","0123456787","pv14","tester03@gmail.com");
         userList.add(p1);
-        p1 = new Profile("Tester 4","0123456786","pv13","tester4@gmail.com");
+        p1 = new Profile("Tester 4","0123456786","pv13","tester04@gmail.com");
         userList.add(p1);
     }
     
