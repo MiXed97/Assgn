@@ -5,6 +5,10 @@
  */
 package assgn;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Mixed_97
@@ -14,8 +18,81 @@ public class DeliveryTable extends javax.swing.JFrame {
     /**
      * Creates new form DeliveryTable
      */
+    ArrayListInterface<DeliveryMen> deliveryMen = new ArrList<>();
+    ArrayListInterface<Customer> customer = new ArrList<>();
+    ArrayListInterface<Menu> menu = new ArrList<>();
+    ArrayListInterface<Order> order = new ArrList<>();
+    ArrayListInterface<Order> order1 = new ArrList<>();
+    ArrayListInterface<Delivery> delivery = new ArrList<>();
+    int index;
+    
+    
     public DeliveryTable() {
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Turn t = new Turn();
+        
+        DeliveryMen d1 = new DeliveryMen("Nicholas","666","Somewhere","01234567",123.00);
+        DeliveryMen d2 = new DeliveryMen("Soon Jian Kai","999","No where","01899997",223.00);
+        DeliveryMen d3 = new DeliveryMen("Ng Poh Hooi","555","LoL","01934567",323.00);
+        DeliveryMen d4 = new DeliveryMen("Ong Kai Zhi","777","Wonder Land","01134567",423.00);
+        
+        deliveryMen.add(d1);
+        deliveryMen.add(d2);
+        deliveryMen.add(d3);
+        deliveryMen.add(d4);
+        
+        Customer c = new Customer("Name", "HOO LAND", "012378999","email","hello");
+        Customer c1 = new Customer("Name1", "no MAN LAND", "014378999","email1","hello1");
+        
+        customer.add(c);
+        customer.add(c1);
+        
+        Menu m = new Menu("1","Burger",12.3);
+        Menu m1 = new Menu("2", "hotdog",10.5);
+        Menu m2 = new Menu("3","fries",5.0);
+        
+        menu.add(m);
+        menu.add(m1);
+        menu.add(m2);
+        
+        Order o = new Order(m);
+        Order o1 = new Order(m1);
+        
+        order.add(o);
+        order.add(o1);
+        
+        Delivery d = new Delivery("1", c, "Not deliver", order, deliveryMen.get(t.findTurn(deliveryMen)- 1) );
+        
+        delivery.add(d);
+        //1 delivery
+        
+        
+        Order o2 = new Order(m2);
+        Order o3 = new Order(m);
+        
+        order1.add(o3);
+        order1.add(o2);
+        
+        Delivery de1 = new Delivery("2", c1, "Not deliver", order1, deliveryMen.get(t.findTurn(deliveryMen)- 1));
+        
+        
+        
+        delivery.add(de1);
+        //2nd delivery
+        
+        Delivery de2 = new Delivery("3",c1, "Not deliver", order1, deliveryMen.get(t.findTurn(deliveryMen)-1));
+        delivery.add(de2);
+        
+        Delivery de3 = new Delivery("4",c1, "Not deliver", order1, deliveryMen.get(t.findTurn(deliveryMen)-1));
+        delivery.add(de3);
+        
+        Delivery de4 = new Delivery("5",c1, "Not deliver", order1, deliveryMen.get(t.findTurn(deliveryMen)-1));
+        delivery.add(de4);
+        
+        Delivery de5 = new Delivery("6",c1, "Not deliver", order1, deliveryMen.get(t.findTurn(deliveryMen)-1));
+        delivery.add(de5);
+        displayTable();
     }
 
     /**
@@ -30,6 +107,9 @@ public class DeliveryTable extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        _deliveryid = new javax.swing.JTextField();
+        _ConfirmDelivery = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,10 +121,19 @@ public class DeliveryTable extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Customer Name", " address", "Contact No", "Delivery Id", "Status", "DeliveryMen id", "Name"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel2.setText("Delivery ID :");
+
+        _ConfirmDelivery.setText("Confirm Delivery");
+        _ConfirmDelivery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _ConfirmDeliveryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,8 +143,16 @@ public class DeliveryTable extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(284, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_ConfirmDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(_deliveryid, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,12 +160,35 @@ public class DeliveryTable extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(142, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(_deliveryid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(_ConfirmDelivery)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void _ConfirmDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__ConfirmDeliveryActionPerformed
+        // TODO add your handling code here:
+        if(checkDeliveryID()){
+            delivery.get(index).setStatus("Delivered");
+            removeDisplay();
+            displayTable();
+            JOptionPane.showMessageDialog(null, "Successfully deliver order "+ delivery.get(index).deliveryID);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid Delivery Id", "Error", JOptionPane.ERROR_MESSAGE );
+        }
+        
+    }//GEN-LAST:event__ConfirmDeliveryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,9 +224,45 @@ public class DeliveryTable extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void displayTable(){
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        Object row[] = new Object[7];
+        for(int i = 0; i < delivery.size();i++)
+        {
+            row[0] = delivery.get(i).getCustomer().getName();
+            row[1] = delivery.get(i).getCustomer().getAddress();
+            row[2] = delivery.get(i).getCustomer().getContactNo();
+            row[3] = delivery.get(i).getDeliveryID();
+            row[4] = delivery.get(i).getStatus();
+            row[5] = delivery.get(i).getDeliveryMen().getStaffID();
+            row[6] = delivery.get(i).getDeliveryMen().getName();
+            model.addRow(row);
+        }
+    }
+    
+    public void removeDisplay(){
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+    }
+    
+    public boolean checkDeliveryID(){
+        
+        for(int i = 0; i < delivery.size();i++)
+            if(delivery.get(i).getDeliveryID().equals(_deliveryid.getText())){
+                index = i;
+                return true;
+            }
+        return false;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton _ConfirmDelivery;
+    private javax.swing.JTextField _deliveryid;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

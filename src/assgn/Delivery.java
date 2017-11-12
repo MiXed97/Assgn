@@ -9,16 +9,26 @@ package assgn;
  *
  * @author Mixed_97
  */
-public class Delivery implements DeliveryInterface{
+public class Delivery {
 
     //get info from customer
     String deliveryID;
     Customer customer;
     String status;
-    Order order;
+    ArrayListInterface<Order> order = new ArrList<>();
     DeliveryMen deliveryMen;
-    int curr = 1;
+    
 
+    public Delivery(){}
+    
+    public Delivery(String deliveryID, Customer customer, String status, ArrayListInterface<Order> order, DeliveryMen deliveryMen){
+        this.deliveryID = deliveryID;
+        this.customer= customer;
+        this.status = status;
+        this.order = order;
+        this.deliveryMen = deliveryMen;
+    }
+    
     public String getDeliveryID() {
         return deliveryID;
     }
@@ -43,11 +53,11 @@ public class Delivery implements DeliveryInterface{
         this.status = status;
     }
 
-    public Order getOrder() {
+    public ArrayListInterface<Order> getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(ArrayListInterface<Order> order) {
         this.order = order;
     }
     
@@ -57,26 +67,6 @@ public class Delivery implements DeliveryInterface{
 
     public void setDeliveryMen(DeliveryMen deliveryMen) {
         this.deliveryMen = deliveryMen;
-    }
-    
-    @Override
-    public int jobAssign(int size) {
-        int result = curr;
-        if(curr!= size)
-            curr++;
-        else
-            curr=1;
-        return result;
-    }
-    
-    @Override
-    public void createDelivery(Customer customer,String status,Order order, DeliveryMen deliverymen){
-        
-        this.customer = customer;
-        this.status="No yet deliver";
-        this.order = order;
-        this.deliveryMen = deliveryMen;
-        
     }
     
 }

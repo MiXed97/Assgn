@@ -19,7 +19,7 @@ public class Customer {
 
     public Customer(){}
     
-    public Customer(String name, String address, String cosntactNo, String email, String password) {
+    public Customer(String name, String address, String contactNo, String email, String password) {
         this.name = name;
         this.address = address;
         this.contactNo = contactNo;
