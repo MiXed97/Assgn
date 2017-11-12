@@ -30,7 +30,7 @@ public class DeliveryTable extends javax.swing.JFrame {
     public DeliveryTable() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        Turn t = new Turn();
+        TurnInterface t = new Turn();
         
         DeliveryMen d1 = new DeliveryMen("Nicholas","666","Somewhere","01234567",123.00);
         DeliveryMen d2 = new DeliveryMen("Soon Jian Kai","999","No where","01899997",223.00);
