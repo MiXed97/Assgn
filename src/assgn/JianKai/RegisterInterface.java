@@ -1,4 +1,4 @@
-package usingdatastructure;
+package assgn.JianKai;
 
 
 public interface RegisterInterface {
