@@ -17,6 +17,7 @@ public class DeliveryTable extends javax.swing.JFrame {
 
     /**
      * Creates new form DeliveryTable
+     * do u know y helium ,curium and barium is known as medical element because if u cant helium or curium then u just gonna barium.
      */
     ArrayListInterface<DeliveryMen> deliveryMen = new ArrList<>();
     ArrayListInterface<Customer> customer = new ArrList<>();
