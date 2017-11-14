@@ -130,41 +130,21 @@ public class RegisterAffiliate extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        RegisterInterface q = new RegisterImplements();
-        String theenteredname = jTextField1.getText();
-        String theenteredresname = jTextField3.getText();
-        String theenteredic = jTextField4.getText();
-        String theenteredtel = jTextField5.getText();
-        String theenteredemail = jTextField6.getText();
+        
 
-        if(q.checkName(theenteredname) && q.checkResName(theenteredresname) && q.checkIC(theenteredic) && q.checkTel(theenteredtel) && q.checkEmail(theenteredemail))
+        Customer c = new Customer(jTextField1.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText(), jTextField6.getText());
+        RegisterInterface q = c;
+        //CustomerInterface cus = new Customer();
+        //cus.store();
+
+        if(q.checkName() && q.checkResName() && q.checkIC() && q.checkTel() && q.checkEmail())
         { 
-             try
-             {
-                String host = "jdbc:derby://localhost:1527/Affiliates";
-                String name = "umi";
-                String pw = "umi";
-                String query = "Insert into AFTABLE values(?,?,?,?,?)";
-                Connection con = DriverManager.getConnection(host,name,pw);
-                PreparedStatement ps = con.prepareStatement(query);
-                ps.setString(1,theenteredname);
-                ps.setString(2,theenteredresname);
-                ps.setString(3,theenteredic);
-                ps.setString(4,theenteredtel);
-                ps.setString(5,theenteredemail);
-                ps.execute();
-                con.close();
+                q.store();
                 JOptionPane.showMessageDialog(this, "Register successful");
+                this.close();
                 Menu m = new Menu();
                 m.setVisible(true);
-                close();
-            }
-            catch(SQLException ex)
-            {
-                System.out.println(ex.getMessage());
-
-            }
-             
+ 
         }
         
         else

@@ -1,8 +1,14 @@
 package assgn.JianKai;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-public class RegisterImplements implements RegisterInterface{
+public class Customer implements RegisterInterface{
     
     private String name;
     private String resname;
@@ -11,8 +17,13 @@ public class RegisterImplements implements RegisterInterface{
     private String email;
     private String thetel;
     private String theerror="";
+    String host = "jdbc:derby://localhost:1527/Affiliates";
+    String name1 = "umi";
+    String pw = "umi";
     
-    public void setall(String name,String resname,String IC,String tel,String email)
+    public Customer(){}
+    
+public Customer(String name,String resname,String IC,String tel,String email)
     {
         this.name = name;
         this.resname = resname;
@@ -22,7 +33,7 @@ public class RegisterImplements implements RegisterInterface{
     }
     
     @Override
-    public boolean checkName(String name) {
+    public boolean checkName() {
         boolean result = true;
         
         char c[] = name.toCharArray();
@@ -47,7 +58,7 @@ public class RegisterImplements implements RegisterInterface{
     
 
     @Override
-    public boolean checkResName(String resname) {
+    public boolean checkResName() {
         boolean result = true;
         if (resname.isEmpty()) {
             theerror += "Please enter your restaurent name \n";
@@ -58,7 +69,7 @@ public class RegisterImplements implements RegisterInterface{
     }
 
     @Override
-    public boolean checkIC(String IC) {
+    public boolean checkIC() {
         boolean result = true;
         char d[] = IC.toCharArray();
         int iclength = d.length;
@@ -88,7 +99,7 @@ public class RegisterImplements implements RegisterInterface{
     }
 
     @Override
-    public boolean checkTel(String tel) {
+    public boolean checkTel() {
         boolean result = true;
         if (tel.isEmpty()) {
             theerror += "Please enter your telephone number \n";
@@ -112,7 +123,7 @@ public class RegisterImplements implements RegisterInterface{
     }
 
     @Override
-    public boolean checkEmail(String email) {
+    public boolean checkEmail(){
         boolean result = true;
         if (!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email))) 
         {
@@ -127,8 +138,31 @@ public class RegisterImplements implements RegisterInterface{
         return result;
     }
     
+    
+    
+    
     public String toString(){
         return theerror;
     }
+
+    @Override
+    public void store() {
+        
+        String query = "Insert into AFTABLE values(?,?,?,?,?)";
+        try {
+            Connection con = DriverManager.getConnection(host,name1,pw);
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,name);
+            ps.setString(2,resname);
+            ps.setString(3,IC);
+            ps.setString(4,tel);
+            ps.setString(5,email);
+            ps.execute();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }
