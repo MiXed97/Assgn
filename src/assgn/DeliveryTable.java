@@ -24,12 +24,12 @@ public class DeliveryTable extends javax.swing.JFrame {
     ArrayListInterface<Order> order = new ArrList<>();
     ArrayListInterface<Order> order1 = new ArrList<>();
     ArrayListInterface<Delivery> delivery = new ArrList<>();
-    DeliveryInterface deli = new Delivery();
-    int index;
-    
+    DeliveryInterface deli = new Delivery();    
+    DefaultTableModel model;
     
     public DeliveryTable() {
         initComponents();
+        model = (DefaultTableModel)jTable1.getModel();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         TurnInterface t = new Turn();
         
@@ -94,7 +94,7 @@ public class DeliveryTable extends javax.swing.JFrame {
         Delivery de5 = new Delivery("6",c1, "Not deliver", order1, deliveryMen.get(t.findTurn(deliveryMen)-1));
         delivery.add(de5);
         
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+         
         deli.displayTable(model, delivery);
     }
 
@@ -183,7 +183,6 @@ public class DeliveryTable extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(deli.checkDeliveryID(delivery, _deliveryid.getText())){
             delivery.get(deli.getIndex()).setStatus("Delivered");
-            DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             deli.removeDisplay(model);
             deli.displayTable(model, delivery);
             JOptionPane.showMessageDialog(null, "Successfully deliver order "+ delivery.get(deli.getIndex()).deliveryID);
