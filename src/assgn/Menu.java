@@ -9,7 +9,7 @@ package assgn;
  *
  * @author Mixed_97
  */
-public class Menu {
+public class Menu implements MenuInterface{
     String menuID;
     String menuName;
     double price;

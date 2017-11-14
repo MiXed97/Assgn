@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import net.proteanit.sql.DbUtils;
+//import net.proteanit.sql.DbUtils;
 
 /**/
 
@@ -29,7 +29,7 @@ public class Menu extends javax.swing.JFrame {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             
-            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+           // jTable1.setModel(DbUtils.resultSetToTableModel(rs));
             
             
         }
