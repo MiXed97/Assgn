@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-public class Customer implements RegisterInterface{
+public class aff implements RegisterInterface{
     
     private String name;
     private String resname;
@@ -20,9 +20,9 @@ public class Customer implements RegisterInterface{
     String name1 = "umi";
     String pw = "umi";
     
-    public Customer(){}
+    public aff(){}
     
-public Customer(String name,String resname,String IC,String tel,String email)
+public aff(String name,String resname,String IC,String tel,String email)
     {
         this.name = name;
         this.resname = resname;

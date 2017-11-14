@@ -128,7 +128,7 @@ public class RegisterAffiliate extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        Customer c = new Customer(jTextField1.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText(), jTextField6.getText());
+        aff c = new aff(jTextField1.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText(), jTextField6.getText());
         RegisterInterface q = c;
 
         if(q.checkName() && q.checkResName() && q.checkIC() && q.checkTel() && q.checkEmail())

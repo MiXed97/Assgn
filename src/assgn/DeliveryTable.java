@@ -24,6 +24,7 @@ public class DeliveryTable extends javax.swing.JFrame {
     ArrayListInterface<Order> order = new ArrList<>();
     ArrayListInterface<Order> order1 = new ArrList<>();
     ArrayListInterface<Delivery> delivery = new ArrList<>();
+    DeliveryInterface deli = new Delivery();
     int index;
     
     
@@ -92,7 +93,9 @@ public class DeliveryTable extends javax.swing.JFrame {
         
         Delivery de5 = new Delivery("6",c1, "Not deliver", order1, deliveryMen.get(t.findTurn(deliveryMen)-1));
         delivery.add(de5);
-        displayTable();
+        
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        deli.displayTable(model, delivery);
     }
 
     /**
@@ -178,11 +181,12 @@ public class DeliveryTable extends javax.swing.JFrame {
 
     private void _ConfirmDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__ConfirmDeliveryActionPerformed
         // TODO add your handling code here:
-        if(checkDeliveryID()){
-            delivery.get(index).setStatus("Delivered");
-            removeDisplay();
-            displayTable();
-            JOptionPane.showMessageDialog(null, "Successfully deliver order "+ delivery.get(index).deliveryID);
+        if(deli.checkDeliveryID(delivery, _deliveryid.getText())){
+            delivery.get(deli.getIndex()).setStatus("Delivered");
+            DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+            deli.removeDisplay(model);
+            deli.displayTable(model, delivery);
+            JOptionPane.showMessageDialog(null, "Successfully deliver order "+ delivery.get(deli.getIndex()).deliveryID);
         }
         else{
             JOptionPane.showMessageDialog(null, "Invalid Delivery Id", "Error", JOptionPane.ERROR_MESSAGE );
@@ -225,38 +229,6 @@ public class DeliveryTable extends javax.swing.JFrame {
         });
     }
     
-    public void displayTable(){
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        Object row[] = new Object[7];
-        for(int i = 0; i < delivery.size();i++)
-        {
-            row[0] = delivery.get(i).getCustomer().getName();
-            row[1] = delivery.get(i).getCustomer().getAddress();
-            row[2] = delivery.get(i).getCustomer().getContactNo();
-            row[3] = delivery.get(i).getDeliveryID();
-            row[4] = delivery.get(i).getStatus();
-            row[5] = delivery.get(i).getDeliveryMen().getStaffID();
-            row[6] = delivery.get(i).getDeliveryMen().getName();
-            model.addRow(row);
-        }
-    }
-    
-    public void removeDisplay(){
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        
-        model.getDataVector().removeAllElements();
-        model.fireTableDataChanged();
-    }
-    
-    public boolean checkDeliveryID(){
-        
-        for(int i = 0; i < delivery.size();i++)
-            if(delivery.get(i).getDeliveryID().equals(_deliveryid.getText())){
-                index = i;
-                return true;
-            }
-        return false;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton _ConfirmDelivery;

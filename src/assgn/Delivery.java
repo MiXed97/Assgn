@@ -5,11 +5,13 @@
  */
 package assgn;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Mixed_97
  */
-public class Delivery {
+public class Delivery implements DeliveryInterface{
 
     //get info from customer
     String deliveryID;
@@ -17,7 +19,7 @@ public class Delivery {
     String status;
     ArrayListInterface<Order> order = new ArrList<>();
     DeliveryMen deliveryMen;
-    
+    int index;
 
     public Delivery(){}
     
@@ -67,6 +69,46 @@ public class Delivery {
 
     public void setDeliveryMen(DeliveryMen deliveryMen) {
         this.deliveryMen = deliveryMen;
+    }
+    
+    @Override
+    public void displayTable(DefaultTableModel model, ArrayListInterface<Delivery> delivery){
+        
+        Object row[] = new Object[7];
+        for(int i = 0; i < delivery.size();i++)
+        {
+            row[0] = delivery.get(i).getCustomer().getName();
+            row[1] = delivery.get(i).getCustomer().getAddress();
+            row[2] = delivery.get(i).getCustomer().getContactNo();
+            row[3] = delivery.get(i).getDeliveryID();
+            row[4] = delivery.get(i).getStatus();
+            row[5] = delivery.get(i).getDeliveryMen().getStaffID();
+            row[6] = delivery.get(i).getDeliveryMen().getName();
+            model.addRow(row);
+        }
+    }
+
+    @Override
+    public boolean checkDeliveryID(ArrayListInterface<Delivery> delivery,String deliveryID) {
+            
+
+        for(int i = 0; i < delivery.size();i++)
+            if(delivery.get(i).getDeliveryID().equals(deliveryID)){
+                index =i;
+                return true;
+            }
+        return false;
+    }
+
+    @Override
+    public void removeDisplay(DefaultTableModel model) {
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+    }
+
+    @Override
+    public int getIndex() {
+        return index;
     }
     
 }
