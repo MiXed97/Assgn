@@ -6,14 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
 public class RegisterAffiliate extends javax.swing.JFrame {
-
 
     public RegisterAffiliate() {
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -131,11 +128,8 @@ public class RegisterAffiliate extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-
         Customer c = new Customer(jTextField1.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText(), jTextField6.getText());
         RegisterInterface q = c;
-        //CustomerInterface cus = new Customer();
-        //cus.store();
 
         if(q.checkName() && q.checkResName() && q.checkIC() && q.checkTel() && q.checkEmail())
         { 
@@ -161,10 +155,10 @@ public class RegisterAffiliate extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         jTextField1.setText("");
-         jTextField3.setText("");
-          jTextField4.setText("");
-           jTextField5.setText("");
-            jTextField6.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
            
         
     }//GEN-LAST:event_jButton2ActionPerformed

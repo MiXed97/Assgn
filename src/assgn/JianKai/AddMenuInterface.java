@@ -10,10 +10,11 @@ package assgn.JianKai;
  * @author USER
  */
 public interface AddMenuInterface {
-    public void setall(String foodname,String resname, String desc, String price, String tel);
-    public boolean checkfn(String foodname);
-    public boolean checkrn(String resname);
-    public boolean checkdesc(String desc);
-    public boolean checkprice(String price);
-    public boolean checktel(String tel);
+
+    public boolean checkfn();
+    public boolean checkrn();
+    public boolean checkdesc();
+    public boolean checkprice();
+    public boolean checktel();
+    public void storefood();
 }

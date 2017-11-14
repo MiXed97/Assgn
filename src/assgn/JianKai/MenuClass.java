@@ -5,11 +5,17 @@
  */
 package assgn.JianKai;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
  */
-public class AddMenuImplements implements AddMenuInterface{
+public class MenuClass implements AddMenuInterface{
     
     private String foodname;
     private String resname;
@@ -18,9 +24,14 @@ public class AddMenuImplements implements AddMenuInterface{
     private String tel;
     
     private String theerror="";
+    
+    String host = "jdbc:derby://localhost:1527/Affiliates";
+    String name = "umi";
+    String pw = "umi";
+    
+    public MenuClass(){}
 
-    @Override
-    public void setall(String foodname, String resname, String desc, String price, String tel) {
+    public MenuClass(String foodname, String resname, String desc, String price, String tel) {
         this.foodname = foodname;
         this.resname = resname;
         this.desc = desc;
@@ -29,7 +40,7 @@ public class AddMenuImplements implements AddMenuInterface{
     }
 
     @Override
-    public boolean checkfn(String foodname) {
+    public boolean checkfn() {
         boolean result = true;
         char c[] = foodname.toCharArray();
         int namelength = c.length;
@@ -51,7 +62,7 @@ public class AddMenuImplements implements AddMenuInterface{
     }
 
     @Override
-    public boolean checkrn(String resname) {
+    public boolean checkrn() {
         boolean result = true;
         if (resname.isEmpty()) {
             theerror += "Please enter your restaurent name \n";
@@ -63,7 +74,7 @@ public class AddMenuImplements implements AddMenuInterface{
     }
 
     @Override
-    public boolean checkdesc(String desc) {
+    public boolean checkdesc() {
         boolean result = true;
         if (desc.isEmpty()) {
             theerror += "Please enter your food description \n";
@@ -75,7 +86,7 @@ public class AddMenuImplements implements AddMenuInterface{
     }
 
     @Override
-    public boolean checkprice(String price) {
+    public boolean checkprice() {
         boolean result = true;
         if (price.isEmpty()) {
             theerror += "Please enter your food price \n";
@@ -95,7 +106,7 @@ public class AddMenuImplements implements AddMenuInterface{
     }
 
     @Override
-    public boolean checktel(String tel) {
+    public boolean checktel() {
         boolean result = true;
         if (tel.isEmpty()) {
             theerror += "Please enter your telephone number \n";
@@ -122,6 +133,30 @@ public class AddMenuImplements implements AddMenuInterface{
     
     public String toString(){
         return theerror;
+    }
+
+    @Override
+    public void storefood() {
+        try
+             {
+                
+                String query = "Insert into MENU values(?,?,?,?,?)";
+                Connection con = DriverManager.getConnection(host,name,pw);
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setString(1,foodname);
+                ps.setString(2,resname);
+                ps.setString(3,desc);
+                ps.setString(4, price);
+                ps.setString(5,tel);
+                ps.execute();
+                con.close();
+                
+            }
+            catch(SQLException ex)
+            {
+                System.out.println(ex.getMessage());
+
+            }
     }
     
 }

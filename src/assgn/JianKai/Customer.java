@@ -15,7 +15,6 @@ public class Customer implements RegisterInterface{
     private String IC;
     private String tel;
     private String email;
-    private String thetel;
     private String theerror="";
     String host = "jdbc:derby://localhost:1527/Affiliates";
     String name1 = "umi";
@@ -138,9 +137,6 @@ public Customer(String name,String resname,String IC,String tel,String email)
         return result;
     }
     
-    
-    
-    
     public String toString(){
         return theerror;
     }
@@ -160,7 +156,7 @@ public Customer(String name,String resname,String IC,String tel,String email)
             ps.execute();
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
     

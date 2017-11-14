@@ -154,42 +154,17 @@ public class AddMenu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String foodname = jTextField1.getText();
-        String resname = jTextField2.getText();
-        String desc = jTextField3.getText();
-        String price = jTextField4.getText();
-        String tel = jTextField5.getText();
-        AddMenuInterface p = new AddMenuImplements();
         
-        if (p.checkfn(foodname) && p.checkrn(resname) && p.checkdesc(desc) && p.checkprice(price) && p.checktel(tel)) 
+        MenuClass mc = new MenuClass(jTextField1.getText(),jTextField2.getText(),jTextField3.getText(),jTextField4.getText(),jTextField5.getText());
+        AddMenuInterface p = mc;
+        
+        if (p.checkfn() && p.checkrn() && p.checkdesc() && p.checkprice() && p.checktel()) 
         {
-             
-            try
-             {
-                String host = "jdbc:derby://localhost:1527/Affiliates";
-                String name = "umi";
-                String pw = "umi";
-                String query = "Insert into MENU values(?,?,?,?,?)";
-                Connection con = DriverManager.getConnection(host,name,pw);
-                PreparedStatement ps = con.prepareStatement(query);
-                ps.setString(1,foodname);
-                ps.setString(2,resname);
-                ps.setString(3,desc);
-                ps.setString(4, price);
-                ps.setString(5,tel);
-                ps.execute();
-                con.close();
-                JOptionPane.showMessageDialog(this, "Add successful");
-                Menu show = new Menu();  
-                show.setVisible(true);
-                close();
-                
-            }
-            catch(SQLException ex)
-            {
-                System.out.println(ex.getMessage());
-
-            }
+            p.storefood();
+            JOptionPane.showMessageDialog(this, "Add successful");
+            Menu m = new Menu();
+            m.setVisible(true);
+            close();
         }
         else
         {
@@ -197,6 +172,7 @@ public class AddMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
     public void close() { 
     this.setVisible(false);
     this.dispose();

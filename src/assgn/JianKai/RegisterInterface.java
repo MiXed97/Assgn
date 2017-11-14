@@ -1,6 +1,5 @@
 package assgn.JianKai;
 
-
 public interface RegisterInterface {
     
     public boolean checkName();
