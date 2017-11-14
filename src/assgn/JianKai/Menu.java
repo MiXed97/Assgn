@@ -36,7 +36,6 @@ public class Menu extends javax.swing.JFrame {
         catch(SQLException ex)
             {
                 System.out.println(ex.getMessage());
-
             }
     }
 
