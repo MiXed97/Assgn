@@ -13,7 +13,7 @@ public class SearchCustomerDetails extends JFrame{
     private JButton searchBtn = new JButton("Search");
     private JTextField phoneTxt = new JTextField();
     private JLabel space = new JLabel();
-    private JLabel phoneLbl = new JLabel("Enter customer's phone number: ");
+    private JLabel phoneLbl = new JLabel("Enter customer's phone number:  ");
     private ProfileInterface p1;
     private ArrayListInterface<ProfileInterface> userList = new ArrList();
            

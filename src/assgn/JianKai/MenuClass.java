@@ -1,42 +1,65 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package assgn.JianKai;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author USER
- */
 public class MenuClass implements AddMenuInterface{
     
-    private String foodname;
-    private String resname;
-    private String desc;
-    private String price;
-    private String tel;
+    String foodname;
+    String resname;
+    String desc;
+    String price;
+    String status;
     
     private String theerror="";
-    
-    String host = "jdbc:derby://localhost:1527/Affiliates";
-    String name = "umi";
-    String pw = "umi";
+
+    public String getFoodname() {
+        return foodname;
+    }
+
+    public void setFoodname(String foodname) {
+        this.foodname = foodname;
+    }
+
+    public String getResname() {
+        return resname;
+    }
+
+    public void setResname(String resname) {
+        this.resname = resname;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     
     public MenuClass(){}
 
-    public MenuClass(String foodname, String resname, String desc, String price, String tel) {
+    public MenuClass(String foodname, String resname, String desc, String price,String status) {
         this.foodname = foodname;
         this.resname = resname;
         this.desc = desc;
         this.price = price;
-        this.tel = tel;
+        this.status = status;
     }
 
     @Override
@@ -57,18 +80,6 @@ public class MenuClass implements AddMenuInterface{
             return false;
             
         }
-        return result;
-        
-    }
-
-    @Override
-    public boolean checkrn() {
-        boolean result = true;
-        if (resname.isEmpty()) {
-            theerror += "Please enter your restaurent name \n";
-            return false;
-        }
-        
         return result;
         
     }
@@ -105,58 +116,10 @@ public class MenuClass implements AddMenuInterface{
         return result;
     }
 
-    @Override
-    public boolean checktel() {
-        boolean result = true;
-        if (tel.isEmpty()) {
-            theerror += "Please enter your telephone number \n";
-            return false;
-        }
-        
-        char e[] = tel.toCharArray();
-        int tellength = e.length;
-        for (int p = 0; p < tellength; p++) {
-            if (!Character.isDigit(e[p])) {
-                theerror += "Please enter digit for telephone number only \n";
-                return false;
-            }
-        }
-        
-        if (tellength != 10 || tellength != 10) {
-            theerror += "Error telephone length\n";
-            return false;
-        }
-        
-        return result;
-        
-    }
     
     public String toString(){
         return theerror;
     }
 
-    @Override
-    public void storefood() {
-        try
-             {
-                
-                String query = "Insert into MENU values(?,?,?,?,?)";
-                Connection con = DriverManager.getConnection(host,name,pw);
-                PreparedStatement ps = con.prepareStatement(query);
-                ps.setString(1,foodname);
-                ps.setString(2,resname);
-                ps.setString(3,desc);
-                ps.setString(4, price);
-                ps.setString(5,tel);
-                ps.execute();
-                con.close();
-                
-            }
-            catch(SQLException ex)
-            {
-                System.out.println(ex.getMessage());
-
-            }
-    }
     
 }
