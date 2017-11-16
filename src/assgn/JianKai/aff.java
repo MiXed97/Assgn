@@ -1,36 +1,133 @@
 package assgn.JianKai;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class aff implements RegisterInterface{
     
-    private String name;
-    private String resname;
-    private String IC;
-    private String tel;
-    private String email;
-    private String theerror="";
-    String host = "jdbc:derby://localhost:1527/Affiliates";
-    String name1 = "umi";
-    String pw = "umi";
+    String name;
+    String password;
+    String password2;
+    String IC;
+    String tel;
+    String email;
+    String resname;
+    String resadd;
+    String rescat;
+    String postal;
+    String theerror="";
+
     
     public aff(){}
     
-public aff(String name,String resname,String IC,String tel,String email)
+    public aff(String name,String password,String IC,String tel,String email,String resname,String resadd,String postal,String rescat)
     {
         this.name = name;
-        this.resname = resname;
+        this.password = password;
         this.IC = IC;
         this.tel = tel;
         this.email = email;
+        this.resname = resname;
+        this.resadd = resadd;
+        this.postal = postal;
+        this.rescat = rescat;
     }
     
+public aff(String name,String password,String password2,String IC,String tel,String email,String resname,String resadd,String postal,String rescat)
+    {
+        this.name = name;
+        this.password = password;
+        this.password2 = password2;
+        this.IC = IC;
+        this.tel = tel;
+        this.email = email;
+        this.resname = resname;
+        this.resadd = resadd;
+        this.postal = postal;
+        this.rescat = rescat;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
+    public String getIC() {
+        return IC;
+    }
+
+    public void setIC(String IC) {
+        this.IC = IC;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getResname() {
+        return resname;
+    }
+
+    public void setResname(String resname) {
+        this.resname = resname;
+    }
+
+    public String getResadd() {
+        return resadd;
+    }
+
+    public void setResadd(String resadd) {
+        this.resadd = resadd;
+    }
+
+    public String getRescat() {
+        return rescat;
+    }
+
+    public void setRescat(String rescat) {
+        this.rescat = rescat;
+    }
+
+    public String getPostal() {
+        return postal;
+    }
+
+    public void setPostal(String postal) {
+        this.postal = postal;
+    }
+
     @Override
     public boolean checkName() {
         boolean result = true;
@@ -54,18 +151,24 @@ public aff(String name,String resname,String IC,String tel,String email)
         
     }
     
-    
-
-    @Override
-    public boolean checkResName() {
-        boolean result = true;
-        if (resname.isEmpty()) {
-            theerror += "Please enter your restaurent name \n";
-            return false;
-        }
-        
-        return result;
+       @Override
+    public boolean checkPassword() {
+        boolean result = true; 
+           if (password.isEmpty()) {
+               theerror += "Please enter password\n";
+               return false;
+           }
+           
+           if (!password.equals(password2)) {
+               theerror += "Password entered not same\n";
+               return false;
+           }
+           
+           return result;
+           
     }
+    
+    
 
     @Override
     public boolean checkIC() {
@@ -136,29 +239,41 @@ public aff(String name,String resname,String IC,String tel,String email)
         }
         return result;
     }
-    
-    public String toString(){
-        return theerror;
+
+    @Override
+    public boolean checkRes() {
+        boolean result = true;
+        if (resname.isEmpty()) {
+            theerror += "Please enter resturant name\n";
+            return false;
+        }
+        
+        return result;
     }
 
     @Override
-    public void store() {
-        
-        String query = "Insert into AFTABLE values(?,?,?,?,?)";
-        try {
-            Connection con = DriverManager.getConnection(host,name1,pw);
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,name);
-            ps.setString(2,resname);
-            ps.setString(3,IC);
-            ps.setString(4,tel);
-            ps.setString(5,email);
-            ps.execute();
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+    public boolean checkResAdd() {
+        boolean result = true;
+        if (resadd.isEmpty()) {
+            theerror += "Please enter resturant address\n";
+            return false;
         }
+        
+        return result;
+    }
+
+    @Override
+    public boolean checkPostal() {
+        boolean result = true;
+        if (postal.isEmpty()) {
+            theerror += "Please enter resturant postal\n";
+            return false;
+        }
+        
+        return result;
     }
     
-    
+        public String toString(){
+        return theerror;
+    }
 }
